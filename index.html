@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>THE GREAT AUTO SHOWROOM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    img[src*="logo"] {
+      filter: drop-shadow(0 0 10px gold);
+      border-radius: 10px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: linear-gradient(135deg, #121212, #1f1f1f);
+      color: #fff;
+      padding: 0 20px 20px 20px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px 0;
+      background-color: #121212;
+      position: sticky;
+      top: 0;
+      z-index: 1100;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 5rem;
+      color: #FFD700;
+      text-shadow: 0 0 10px #FFD700;
+    }
+    .navbar {
+      background-color: #1c1c1c;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+      position: sticky;
+      top: 160px;
+      z-index: 1000;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+    .navbar a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    .navbar a:hover { color: #ffffff; }
+    .section { padding: 60px 0; }
+    #home video {
+      width: 100%; max-width: 960px; height: auto;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+      margin: 20px 0;
+    }
+    .staff-grid {
+      display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+    }
+    .staff-card {
+      background: #1e1e1e;
+      padding: 16px;
+      border-radius: 12px;
+      width: 220px;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.08);
+      text-align: center;
+    }
+    .staff-card img {
+      width: 100%; height: 240px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .staff-card h4 { margin-top: 12px; color: #FFD700; }
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: #1e1e1e;
+  padding: 24px;
+  border-radius: 16px;
+  max-width: 1200px;     /* ✅ ขยายขนาดแนวนอน */
+  width: 100%;
+  max-height: 100vh;      /* ✅ ขยายแนวตั้ง */
+  overflow-y: auto;      /* ✅ เปิด scroll ถ้าสูงเกิน */
+  color: white;
+}
+
+
+
+.popup-gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.popup-gallery img {
+  height: 180px;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.popup-buttons button {
+  padding: 10px 20px;
+  border: none;
+  background: #FFD700;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.popup-buttons .book-btn {
+  background: #28a745;
+  color: white;
+}
+
+  
+
+
+.car-card img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-bottom: 1px solid #333;
+}
+
+.car-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.car-item {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.car-side-info {
+  flex: 1;
+  max-width: 900px;
+  background: #1e1e1e;
+  color: gold;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  font-size: 16px;
+}
+
+
+
+.info {
+  padding: 16px;
+}
+
+.info h2 {
+  color: #FFD700;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.info p {
+  font-size: 1rem;
+  margin: 4px 0;
+}
+
+.price {
+  color: #ec0202;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.info button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #FFD700;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.info button:hover {
+  background-color: #e6c200;
+}
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="img/logo.png" alt="THE GREAT AUTO" style="height: 150px;">
+    <h1>THE GREAT AUTO</h1>
+  </div>
+  <nav class="navbar">
+    <ul>
+      <li><a href="#home">หน้าหลัก</a></li>
+      <li><a href="#cars">ดูรถทั้งหมด</a></li>
+      <li><a href="#promo">โปรโมชั่น</a></li>
+      <li><a href="#contact">ติดต่อเรา</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="section" style="text-align:center">
+    <video src="videos/1122.mp4" autoplay loop playsinline></video>
+    <h2>ยินดีต้อนรับสู่ THE GREAT AUTO</h2>
+    <p>เราคือโชว์รูมรถยนต์มือสองคุณภาพ พร้อมให้บริการที่คุณวางใจได้ ด้วยทีมงานมืออาชีพ</p>
+    <div style="margin-top:40px">
+     
+    </div>
+    <!-- HTML -->
+<div class="heading-container">
+    <h3 class="team-heading">ทีมงานของเรา</h3>
+    <div class="shooting-star"></div>
+</div>
+
+<!-- CSS -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@600&display=swap');
+
+.heading-container {
+    position: relative;
+    display: inline-block;
+    margin: 60px auto 30px;
+    text-align: center;
+}
+
+.team-heading {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 40px;
+    color: #FFD700;
+    text-align: center;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 2;
+}
+
+/* ดาวหาง */
+.shooting-star {
+    position: absolute;
+    top: -20px;
+    left: -100px;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    border-radius: 4px;
+    animation: shoot 2.5s linear infinite;
+    z-index: 1;
+}
+
+@keyframes shoot {
+    0% {
+        transform: translateX(0) scaleX(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(500px) scaleX(1.2);
+        opacity: 0;
+    }
+}
+</style>
+
+      <div class="staff-grid">
+        <div class="staff-card">
+          <img src="img/jackky.jpg" alt="CEO">
+          <h4>จิรภัทร</h4>
+          <p>ฝ่ายพัฒนาระบบ</p>
+        </div>
+        <div class="staff-card">
+          <img src="img/staff_manager.jpg" alt="Manager">
+          <h4>คุณสุธิดา</h4>
+          <p>ผู้จัดการโชว์รูม</p>
+        </div>
+        <div class="staff-card">
+          <img src="img/staff_sales.jpg" alt="Sales">
+          <h4>คุณพีรดา</h4>
+          <p>ฝ่ายขาย</p>
+        </div>
+        <div class="staff-card">
+          <img src="img/staff_support.jpg" alt="Support">
+          <h4>คุณภานุวัฒน์</h4>
+          <p>ฝ่ายบริการลูกค้า</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cars" class="section" style="display: none;">
+    <div class="car-item">
+  <div class="car-card">
+    <img src="cars/BENZ6766/1.png" alt="Benz">
+  </div>
+  <div class="car-side-info">
+    <h3>BENZ C-CLASS, C200 CGI Blue Efficiency ปี 2013</h3><br>
+    <p>โฉม W204 ปี07-14  สีเทา เครื่องยนต์ เบนซิน เกียร์AUTO ไมล์ 98,332 km.</p><br>
+    <ul style="color: gold;">
+       <li>✅ รุ่นTOP</li>
+       <li>✅ แอร์AUTO</li>
+       <li>✅ เครื่องเสียง FM AM AUX USB bluetooth</li>
+       <li>✅ เบาะหนังปรับไฟฟ้าคู่หน้า</li>
+       <li>✅ พวงมาลัยMultifunction</li>
+       <li>✅ AIRBAG ABS</li>
+       <li>✅ ระบบNAVI</li>
+       <li>✅ แอร์AUTO</li>
+       <li>✅ สภาพดีมาก</li>
+</ul>
+<div class="info">
+      <h2 class="price">ราคา: 409,000 บาท</h2>
+      <button onclick="showPopup('BENZ C200', 'cars/BENZ6766', 18)">ดูรายละเอียด</button>
+    </div>
+    </div>
+</div>
+  </section>
+  
+
+  <section id="promo" class="section" style="display: none;">
+  <h2 style="text-align: center; color: gold; margin-bottom: 20px;">โปรโมชั่นพิเศษ</h2>
+  
+  <video autoplay loop playsinline controls style="
+  width: 100vw;
+  height: auto;
+  margin: 0 auto 40px auto;
+  display: block;
+  border-radius: 0;
+  box-shadow: none;
+">
+  <source src="videos/Intro.mp4" type="video/mp4">
+  วิดีโอนี้ไม่สามารถเล่นได้
+</video>
+
+
+  <div style="text-align: center;">
+    <img src="img/logo.png" alt="โปรแรง" style="max-width: 50%; border-radius: 16px; box-shadow: 0 0 10px gold; margin-bottom: 20px;">
+
+    <p style="font-size: 3rem; color: #fff; max-width: 800px; margin: auto;">
+      📣 โปรโมชั่นพิเศษประจำเดือนนี้!<br>
+      ⭐ ดอกเบี้ยเริ่มต้นเพียง 2.79%<br>
+      🚘 ฟรีค่าจัดไฟแนนซ์ + ของแถมรวมมูลค่ากว่า 10,000 บาท<br>
+      ⏳ ตั้งแต่วันนี้ - 30 มิ.ย. 2025 เท่านั้น!
+    </p>
+  </div>
+</section>
+
+<div class="popup" id="popup">
+    <div class="popup-content">
+      <h2 id="popup-title"></h2>
+      <div class="popup-gallery" id="popup-gallery"></div>
+      <div class="popup-buttons">
+        <button onclick="closePopup()">ปิด</button>
+        <button class="book-btn" onclick="alert('จองเรียบร้อยแล้ว!')">จอง</button>
+      </div>
+    </div>
+  </div>
+
+<section id="contact" class="section" style="display: none;">
+  <h2 style="text-align: center; color: rgb(252, 7, 7); margin-bottom: 20px;">ติดต่อสอบถามเพิ่มเติมได้ที่</h2>
+  <h3 style="text-align: center; color: rgb(255, 254, 251); margin-bottom: 20px;">020-775-399 / 097-081-1260</h3>
+  
+  <h5 style="text-align:center; color:white;">THE GREAT AUTO</h5>
+<div style="text-align:center;">
+  <p style="font-size: 20px;">เลขที่ 125-125/1-5 หมู่ที่ 7 ถนนกาญจนาภิเษก</p>
+  <p style="font-size: 20px;">แขวงฉิมพลี เขตตลิ่งชั่น กรุงเทพฯ 10170</p>
+</div>
+
+  <style>
+  footer {
+    text-align: center;
+    font-size: 20px; /* ปรับขนาดตัวอักษร */
+    padding: 10px;
+    color: #ffffff;
+  }
+
+  footer img {
+    height: 80px; /* ปรับขนาดรูปภาพ เช่นสูง 30px */
+    margin-bottom: 5px;
+  }
+</style>
+
+<footer>
+  <img src="img/By.Jackky.png" alt="logo">
+  <br>
+  © 2025 THE GREAT AUTO - Developed by JACKKY
+</footer>
+
+
+  <script>
+    
+    function showPopup(title, imageDir, count = 10) {
+  document.getElementById("popup-title").textContent = title;
+  const gallery = document.getElementById("popup-gallery");
+  const images = [];
+
+  for (let i = 1; i <= count; i++) {
+    const jpg = `${imageDir}/${i}.jpg`;
+    const png = `${imageDir}/${i}.png`;
+    images.push(`
+      <img src="${jpg}" onerror="this.onerror=null;this.src='${png}'" alt="${title} รูป ${i}">
+    `);
+  }
+
+  gallery.innerHTML = images.join('');
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+
+    window.addEventListener('hashchange', handleHash);
+    window.addEventListener('DOMContentLoaded', handleHash);
+    function handleHash() {
+      const hash = location.hash || '#home';
+      document.querySelector('#home').style.display = (hash === '#home') ? 'block' : 'none';
+      document.querySelector('#cars').style.display = (hash === '#cars') ? 'block' : 'none';
+      document.querySelector('#promo').style.display = (hash === '#promo') ? 'block' : 'none';
+      document.querySelector('#contact').style.display = (hash === '#contact') ? 'block' : 'none';
+    }
+    
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
